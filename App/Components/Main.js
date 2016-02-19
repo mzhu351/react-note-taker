@@ -69,15 +69,15 @@ class Main extends React.Component{
       username: event.nativeEvent.text
     });
   }
-  handleSubmit(event){
+  handleSubmit(){
     //update indicatorIOS spinner
     this.setState({
       isLoading: true
     });
-    api.getBios(this.state.username)
+    api.getBio(this.state.username)
       .then((res) => {
         if(res.message === 'Not Found') {
-          ths.setState({
+          this.setState({
             error: 'User not found',
             isLoading: false
           })
@@ -95,10 +95,11 @@ class Main extends React.Component{
           });
         }
       });
-    //fetch data from github
-    //reroute to the next passing that github info
   }
   render() {
+    var showErr = (
+      this.state.error ? <Text>{this.state.error}</Text> : <View></View>
+    );
     return (
       <View style={styles.mainContainer}>
         <Text style={styles.title}> Search for a Github User </Text>
@@ -112,7 +113,11 @@ class Main extends React.Component{
           underlayColor="white">
           <Text style={styles.buttonText}> SEARCH </Text>
         </TouchableHighlight>
-
+        <ActivityIndicatorIOS
+          animating={this.state.isLoading}
+          color="#111"
+          size="large"></ActivityIndicatorIOS>
+        {showErr}
       </View>
     )
   }
