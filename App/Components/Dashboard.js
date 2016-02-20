@@ -1,4 +1,5 @@
 var React = require('react-native');
+var Profile = require('./Profile');
 
 var {
   Text,
@@ -43,7 +44,11 @@ class Dashboard extends React.Component{
     return obj;
   }
   goToProfile(){
-    console.log('Profile');
+    this.props.navigator.push({
+      component: Profile,
+      title: 'Profile Page',
+      passProps: {userInfo: this.props.userInfo}
+    })
   }
   goToRepos(){
     console.log('Repos');
@@ -65,13 +70,13 @@ class Dashboard extends React.Component{
           style={this.makeBackground(1)}
           onPress={this.goToRepos.bind(this)}
           underlayColor='#88D4F5'>
-          <Text style={styles.buttonText}> View Profile </Text>
+          <Text style={styles.buttonText}> View Repos </Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={this.makeBackground(2)}
           onPress={this.goToNotes.bind(this)}
           underlayColor='#88D4F5'>
-          <Text style={styles.buttonText}> View Profile </Text>
+          <Text style={styles.buttonText}> View Puppies </Text>
         </TouchableHighlight>
       </View>
     )
