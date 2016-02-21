@@ -37,9 +37,9 @@ class Badge extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-      <Image style={styles.image} source={{uri: this.props.userInfo.avatar_url}} />
-      <Text style={styles.name}> {this.props.userInfo.name} </Text>
-      <Text style={styles.handle}> {this.props.userInfo.login} </Text>
+        <Image style={styles.image} source={{uri: this.props.userInfo.avatar_url}} />
+        <Text style={styles.name}> {this.props.userInfo.name} </Text>
+        <Text style={styles.handle}> {this.props.userInfo.login} </Text>
       </View>
     )
   }

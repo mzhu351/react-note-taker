@@ -48,6 +48,7 @@ class Profile extends React.Component{
               <Text style={styles.rowTitle}> {this.getRowTitle(userInfo, item)} </Text>
               <Text style={styles.rowContent}> {userInfo[item]} </Text>
             </View>
+            <Separator />
           </View>
         )
       }
@@ -57,7 +58,6 @@ class Profile extends React.Component{
       <ScrollView style={styles.container}>
         <Badge userInfo={this.props.userInfo} />
         {list}
-        <Separator />
       </ScrollView>
     )
   }
