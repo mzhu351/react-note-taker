@@ -2,6 +2,7 @@ var React = require('react-native');
 var Badge = require('./Badge');
 var Separator = require('./Helpers/Separator');
 var Icon = require('react-native-vector-icons/Ionicons');
+var Web_View = require('./Helpers/WebView');
 
 var {
   ScrollView,
@@ -13,29 +14,37 @@ var {
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
+    flex: 1,
   },
   rowContainer: {
+    flexDirection: 'column',
+    flex: 1,
     padding: 10
   },
-  rowTitle: {
+  name: {
     color: '#48BBEC',
-    fontSize: 16
+    fontSize: 18,
+    paddingBottom: 5
   },
-  rowContent: {
-    fontSize: 19
+  stars: {
+    color: '#48BBEC',
+    fontSize: 14,
+    paddingBottom: 5
+  },
+  description: {
+    fontSize: 14,
+    paddingBottom: 5
   }
 });
 
 class Repos extends React.Component{
 
   openPage(url) {
-    console.log('the url is ', url);
+    this.props.navigator.push({
+      component: Web_View,
+      title: 'Web View',
+      passProps: {url}
+    });
   }
   render() {
     var repos = this.props.repos;

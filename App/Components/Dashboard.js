@@ -1,6 +1,7 @@
 var React = require('react-native');
 var Profile = require('./Profile');
 var Repos = require('./Repos');
+var Notes = require('./Notes');
 var api = require('../Utils/api');
 
 var {
@@ -50,11 +51,12 @@ class Dashboard extends React.Component{
       component: Profile,
       title: 'Profile',
       passProps: {userInfo: this.props.userInfo}
-    })
+    });
   }
   goToRepos(){
     api.getRepos(this.props.userInfo.login)
       .then((res) => {
+        res = res || {};
         this.props.navigator.push({
           component: Repos,
           title: 'Repositories',
@@ -66,7 +68,18 @@ class Dashboard extends React.Component{
       });
   }
   goToNotes(){
-    console.log('Notes');
+    api.getNotes(this.props.userInfo.login)
+      .then((res) => {
+        res = res || {};
+        this.props.navigator.push({
+          component: Notes,
+          title: 'Notes',
+          passProps: {
+            userInfo: this.props.userInfo,
+            notes: res
+          }
+        })
+      });
   }
   render(){
     return (
@@ -88,7 +101,7 @@ class Dashboard extends React.Component{
           style={this.makeBackground(2)}
           onPress={this.goToNotes.bind(this)}
           underlayColor='#88D4F5'>
-          <Text style={styles.buttonText}> View Puppies </Text>
+          <Text style={styles.buttonText}> View Notes </Text>
         </TouchableHighlight>
       </View>
     )
